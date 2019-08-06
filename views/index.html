@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>table模块快速使用</title>
+    <link rel="stylesheet" href="/static/lib/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/css/index.css" media="all">
+</head>
+<body>
+
+{{/*<div class="layui-main">*/}}
+<div class="layui-row">
+    {{/*标题*/}}
+    {{/*<div class="layui-main layui-col-md5  layui-col-md-offset4">*/}}
+    <div class="layui-layer-title">
+        <h1>每日TOP10预测</h1>
+    </div>
+    {{/*表格*/}}
+    <div class="layui-layer-content">
+        <table id="top10" lay-filter="test"></table>
+    </div>
+</div>
+
+
+
+<script src="/static/lib/layui/layui.js"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#top10'
+            // ,height: 312
+            ,url: '/top10' //数据接口
+            // ,page: true //开启分页
+            ,cols: [[ //表头
+                {field: 'stock', title: '股票', width:150}
+                ,{field: 'total', title: 'total', width:150, sort: true}
+                ,{field: '2019-08-02', title: '2019-08-02', width:150, sort: true}
+                ,{field: '2019-08-05', title: '2019-08-05', width:150, sort: true}
+                ,{field: '2019-08-06', title: '2019-08-06', width:150, sort: true}
+                ,{field: '2019-08-07', title: '2019-08-07', width:150, sort: true}
+                ,{field: '2019-08-08', title: '2019-08-08', width:150, sort: true}
+                ,{field: '2019-08-09', title: '2019-08-09', width:150, sort: true}
+                // ,{field: '2019-08-12', title: '2019-08-12', width:150, sort: true}
+                // ,{field: '2019-08-13', title: '2019-08-13', width:150, sort: true}
+                // ,{field: '2019-08-14', title: '2019-08-14', width:150, sort: true}
+                // ,{field: '2019-08-15', title: '2019-08-15', width:150, sort: true}
+                // ,{field: '2019-08-16', title: '2019-08-16', width:150, sort: true}
+                // ,{field: '2019-08-19', title: '2019-08-19', width:150, sort: true}
+                // ,{field: '2019-08-20', title: '2019-08-20', width:150, sort: true}
+                // ,{field: '2019-08-21', title: '2019-08-21', width:150, sort: true}
+                // ,{field: '2019-08-22', title: '2019-08-22', width:150, sort: true}
+                // ,{field: '2019-08-23', title: '2019-08-23', width:150, sort: true}
+
+            ]]
+        });
+
+    });
+</script>
+</body>
+</html>
