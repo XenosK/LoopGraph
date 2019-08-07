@@ -6,12 +6,10 @@
 
 FROM golang:latest
 
-RUN mkdir -p $GOPATH/src/github.com
 WORKDIR $GOPATH/src/LoopGraph
-#ADD $GOPATH/src $GOPATH/src
+
 COPY . $GOPATH/src/LoopGraph
-RUN go-wrapper download
-RUN go-wrapper install
+RUN go get github.com/GumKey/LoopGraph
 
 #RUN go build .
 

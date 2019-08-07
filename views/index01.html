@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>每日TOP10预测</title>
+    {{/*<link rel="stylesheet" href="/static/lib/layui/css/layui.css" media="all">*/}}
+    <link rel="stylesheet" href="/static/css/index.css" media="all">
+    <script src="/static/lib/layui/layui.js"></script>
+</head>
+
+
+<table class="layui-table" lay-data="{ url:'https://www.layui.com/demo/table/user/?page=1&limit=30' }">
+    <thead>
+    <tr>
+        {{/*{{range .dates}}*/}}
+        {{/*<th lay-data="{field:'{{.}}', width:80}">{{.}}</th>*/}}
+        {{/*{{end}}*/}}
+        <th lay-data='{field:"stock", width:80, sort: true}'>stock</th>
+        <th lay-data="{field:'2019-08-02', width:80, sort: true}">2019-08-02</th>
+    </tr>
+    </thead>
+</table>
+
