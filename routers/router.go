@@ -13,7 +13,7 @@ func InitRouter() *gin.Engine {
 	router.Static("/static", "./static")
 
 	authorized := router.Group("/", gin.BasicAuth(gin.Accounts{
-		"loop":    "LOOP2themoon",
+		"root":    "root",
 	}))
 
 	authorized.GET("/", controllers.Index)
