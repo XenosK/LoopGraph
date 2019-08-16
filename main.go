@@ -4,6 +4,7 @@ import (
 	"fmt"
 	_ "LoopGraph/dbutils"
 	"LoopGraph/routers"
+	_ "LoopGraph/configs"
 )
 
 func main()  {

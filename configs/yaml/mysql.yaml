@@ -1,6 +1,6 @@
 local:
-  url: "root:123456@/pipe?charset=utf8&parseTime=True&loc=Local"
+  url: "root:123456@/loop?charset=utf8&parseTime=True&loc=Local"
 
 
 line:
-  url: "root:123456@/pipe?charset=utf8&parseTime=True&loc=Local"
+  url: "线上连接"
