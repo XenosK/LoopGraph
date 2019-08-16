@@ -1,5 +1,9 @@
 package models
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> update laui html and json
 import "time"
 
 type Model struct {
@@ -63,9 +67,17 @@ type Content struct {
 
 type Top10 struct {
 	//Model
+<<<<<<< HEAD
 
+=======
+>>>>>>> update laui html and json
 	Code         int16                 `json:"code" structs:"code"`
 	Count        int32                 `json:"count" structs:"count"`
 	Msg   		 string                `json:"msg" structs:"msg"`
 	Data         []map[string]string   `json:"Data" structs:"Data"`
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> update laui html and json

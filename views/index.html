@@ -2,12 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
+<<<<<<< HEAD
     <title>每日TOP10预测</title>
+=======
+    <title>LOOP实时数据</title>
+>>>>>>> update laui html and json
     <link rel="stylesheet" href="/static/lib/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/static/css/index.css" media="all">
 </head>
 <body>
 
+<<<<<<< HEAD
 {{/*<div class="layui-main">*/}}
 <div class="layui-row">
     {{/*<div class="layui-main layui-col-md5  layui-col-md-offset4">*/}}
@@ -21,12 +26,63 @@
 
 
 <script src="/static/lib/layui/layui.js"></script>
+=======
+<div class="layui-layer-title layui-bg-cyan">
+    <h1>策略涨跌可视化</h1>
+</div>
+
+
+{{/*tab*/}}
+
+<div class="layui-carousel" id="test1">
+    <div carousel-item>
+        <div>条目1</div>
+        <div>条目2</div>
+        <div>条目3</div>
+        <div>条目4</div>
+        <div>条目5</div>
+    </div>
+</div>
+
+<div class="layui-tab layui-tab-card">
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+
+        <ul class="layui-tab-title" >
+            <li class="layui-this" lay-id="111">做多</li>
+            <li lay-id="112">做空</li>
+        </ul>
+
+        <div class="layui-tab-content" style="height: 100px;">
+            <div class="layui-tab-item layui-show">{{ template "loopLong"}}</div>
+            <div class="layui-tab-item">开发中</div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //获取hash来切换选项卡，假设当前地址的hash为lay-id对应的值
+        var layid = location.hash.replace(/^#test1=/, '');
+        element.tabChange('test1', layid); //假设当前地址为：http://a.com#test1=222，那么选项卡会自动切换到“发送消息”这一项
+
+        //监听Tab切换，以改变地址hash值
+        element.on('tab(test1)', function(){
+            location.hash = 'test1='+ this.getAttribute('lay-id');
+        });
+    });
+</script>
+
+>>>>>>> update laui html and json
 <script>
     layui.use('table', function(){
         var table = layui.table;
 
         //第一个实例
         table.render({
+<<<<<<< HEAD
             elem: '#top10'
             // ,height: 312
             ,url: '/top10' //数据接口
@@ -34,6 +90,16 @@
             ,cols: [[ //表头
                 {field: 'stock', title: '股票', width:150}
                 ,{field: 'total', title: 'total', width:150, sort: true}
+=======
+            elem: '#top9bar8'
+            // ,height: 312
+            ,url: '/top10' //数据接口
+            ,page: true //开启分页
+            // ,toolbar: true
+            ,cols: [[ //表头
+                {field: 'stock', title: '股票', width:150}
+                ,{field: 'total', title: '统计', width:150, sort: true}
+>>>>>>> update laui html and json
                 {{range .dates}}
                 ,{field: '{{.}}', title: '{{.}}', width:150, sort: true}
                 {{end}}
@@ -41,8 +107,32 @@
             ]]
         });
 
+<<<<<<< HEAD
+=======
+        {{/*//第一个实例*/}}
+        {{/*table.render({*/}}
+        {{/*elem: '#top10bar5'*/}}
+        {{/*// ,height: 312*/}}
+        {{/*,url: '/top10' //数据接口*/}}
+        {{/*,page: true //开启分页*/}}
+        {{/*// ,toolbar: true*/}}
+        {{/*,cols: [[ //表头*/}}
+        {{/*{field: 'stock', title: '股票', width:150}*/}}
+        {{/*,{field: 'total', title: '统计', width:150, sort: true}*/}}
+        {{/*{{range .dates}}*/}}
+        {{/*,{field: '{{.}}', title: '{{.}}', width:150, sort: true}*/}}
+        {{/*{{end}}*/}}
+
+        {{/*]]*/}}
+        {{/*});*/}}
+
+>>>>>>> update laui html and json
     });
 </script>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> update laui html and json
