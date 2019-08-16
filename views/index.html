@@ -2,31 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-<<<<<<< HEAD
-    <title>每日TOP10预测</title>
-=======
     <title>LOOP实时数据</title>
->>>>>>> update laui html and json
     <link rel="stylesheet" href="/static/lib/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/static/css/index.css" media="all">
 </head>
 <body>
 
-<<<<<<< HEAD
-{{/*<div class="layui-main">*/}}
-<div class="layui-row">
-    {{/*<div class="layui-main layui-col-md5  layui-col-md-offset4">*/}}
-    <div class="layui-layer-title">
-        <h1>每日TOP10预测</h1>
-    </div>
-    <div class="layui-layer-content">
-        <table id="top10" lay-filter="test"></table>
-    </div>
-</div>
-
-
-<script src="/static/lib/layui/layui.js"></script>
-=======
 <div class="layui-layer-title layui-bg-cyan">
     <h1>策略涨跌可视化</h1>
 </div>
@@ -75,22 +56,12 @@
     });
 </script>
 
->>>>>>> update laui html and json
 <script>
     layui.use('table', function(){
         var table = layui.table;
 
         //第一个实例
         table.render({
-<<<<<<< HEAD
-            elem: '#top10'
-            // ,height: 312
-            ,url: '/top10' //数据接口
-            // ,page: true //开启分页
-            ,cols: [[ //表头
-                {field: 'stock', title: '股票', width:150}
-                ,{field: 'total', title: 'total', width:150, sort: true}
-=======
             elem: '#top9bar8'
             // ,height: 312
             ,url: '/top10' //数据接口
@@ -99,7 +70,6 @@
             ,cols: [[ //表头
                 {field: 'stock', title: '股票', width:150}
                 ,{field: 'total', title: '统计', width:150, sort: true}
->>>>>>> update laui html and json
                 {{range .dates}}
                 ,{field: '{{.}}', title: '{{.}}', width:150, sort: true}
                 {{end}}
@@ -107,8 +77,6 @@
             ]]
         });
 
-<<<<<<< HEAD
-=======
         {{/*//第一个实例*/}}
         {{/*table.render({*/}}
         {{/*elem: '#top10bar5'*/}}
@@ -126,13 +94,8 @@
         {{/*]]*/}}
         {{/*});*/}}
 
->>>>>>> update laui html and json
     });
 </script>
 
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> update laui html and json
