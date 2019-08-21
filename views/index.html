@@ -35,7 +35,7 @@
 
         <div class="layui-tab-content" style="height: 100px;">
             <div class="layui-tab-item layui-show">{{ template "loopLong"}}</div>
-            <div class="layui-tab-item">开发中</div>
+            <div class="layui-tab-item">{{ template "loopShort"}}</div>
         </div>
 
     </div>
@@ -60,39 +60,107 @@
     layui.use('table', function(){
         var table = layui.table;
 
-        //第一个实例
+        //分类做多
         table.render({
-            elem: '#top9bar8'
+            elem: '#rlong'
             // ,height: 312
-            ,url: '/top10' //数据接口
+            ,url: '/top10/rlong' //数据接口
             ,page: true //开启分页
             // ,toolbar: true
             ,cols: [[ //表头
                 {field: 'stock', title: '股票', width:150}
                 ,{field: 'total', title: '统计', width:150, sort: true}
-                {{range .dates}}
+                {{range .dates_rlong}}
                 ,{field: '{{.}}', title: '{{.}}', width:150, sort: true}
                 {{end}}
 
             ]]
         });
 
-        {{/*//第一个实例*/}}
-        {{/*table.render({*/}}
-        {{/*elem: '#top10bar5'*/}}
-        {{/*// ,height: 312*/}}
-        {{/*,url: '/top10' //数据接口*/}}
-        {{/*,page: true //开启分页*/}}
-        {{/*// ,toolbar: true*/}}
-        {{/*,cols: [[ //表头*/}}
-        {{/*{field: 'stock', title: '股票', width:150}*/}}
-        {{/*,{field: 'total', title: '统计', width:150, sort: true}*/}}
-        {{/*{{range .dates}}*/}}
-        {{/*,{field: '{{.}}', title: '{{.}}', width:150, sort: true}*/}}
-        {{/*{{end}}*/}}
+        //财务做多
+        table.render({
+            elem: '#flong'
+            // ,height: 312
+            ,url: '/top10/flong' //数据接口
+            ,page: true //开启分页
+            // ,toolbar: true
+            ,cols: [[ //表头
+                {field: 'stock', title: '股票', width:150}
+                ,{field: 'total', title: '统计', width:150, sort: true}
+                {{range .dates_flong}}
+                ,{field: '{{.}}', title: '{{.}}', width:150, sort: true}
+                {{end}}
 
-        {{/*]]*/}}
-        {{/*});*/}}
+            ]]
+        });
+
+        // 滑动窗口做多
+        table.render({
+            elem: '#slong'
+            // ,height: 312
+            ,url: '/top10/slong' //数据接口
+            ,page: true //开启分页
+            // ,toolbar: true
+            ,cols: [[ //表头
+                {field: 'stock', title: '股票', width:150}
+                ,{field: 'total', title: '统计', width:150, sort: true}
+                {{range .dates_slong}}
+                ,{field: '{{.}}', title: '{{.}}', width:150, sort: true}
+                {{end}}
+
+            ]]
+        });
+
+        //分类做空
+        table.render({
+            elem: '#rshort'
+            // ,height: 312
+            ,url: '/top10/rshort' //数据接口
+            ,page: true //开启分页
+            // ,toolbar: true
+            ,cols: [[ //表头
+                {field: 'stock', title: '股票', width:150}
+                ,{field: 'total', title: '统计', width:150, sort: true}
+                {{range .dates_rshort}}
+                ,{field: '{{.}}', title: '{{.}}', width:150, sort: true}
+                {{end}}
+
+            ]]
+        });
+
+        //财务做空
+        table.render({
+            elem: '#fshort'
+            // ,height: 312
+            ,url: '/top10/fshort' //数据接口
+            ,page: true //开启分页
+            // ,toolbar: true
+            ,cols: [[ //表头
+                {field: 'stock', title: '股票', width:150}
+                ,{field: 'total', title: '统计', width:150, sort: true}
+                {{range .dates_fshort}}
+                ,{field: '{{.}}', title: '{{.}}', width:150, sort: true}
+                {{end}}
+
+            ]]
+        });
+
+        // 滑动窗口做空
+        table.render({
+            elem: '#sshort'
+            // ,height: 312
+            ,url: '/top10/sshort' //数据接口
+            ,page: true //开启分页
+            // ,toolbar: true
+            ,cols: [[ //表头
+                {field: 'stock', title: '股票', width:150}
+                ,{field: 'total', title: '统计', width:150, sort: true}
+                {{range .dates_sshort}}
+                ,{field: '{{.}}', title: '{{.}}', width:150, sort: true}
+                {{end}}
+
+            ]]
+        });
 
     });
 </script>

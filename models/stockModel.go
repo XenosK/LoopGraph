@@ -40,13 +40,57 @@ type ApiData struct {
 	Data     uint64    `json:"id" structs:"id"`
 }
 
-type Realprice struct {
+
+// 做多top9bar10
+type LongShort struct {
 	//Model
 
 	Content      string    `json:"content" structs:"content"`
 	Id           string    `json:"id" structs:"id"`
 	Uptime       time.Time `json:"uptime" structs:"uptime"`
 	Create_time  string `json:"create_time" structs:"create_time"`
+
+}
+
+// 做多top9bar10
+type Realprice struct {
+	//Model
+	LongShort
+
+}
+
+// 滑动窗口做多
+type Sliding_window_20_long_realprice struct {
+	//Model
+	LongShort
+
+}
+
+//滑动窗口做空
+type Sliding_window_20_short_realprice struct {
+	//Model
+	LongShort
+
+}
+
+//财务做多
+type Finance_long_realprice struct {
+	//Model
+	LongShort
+
+}
+
+//财务做空
+type Finance_short_realprice struct {
+	//Model
+	LongShort
+
+}
+
+// 二分类做空
+type Class_2_short_realprice struct {
+	//Model
+	LongShort
 
 }
 

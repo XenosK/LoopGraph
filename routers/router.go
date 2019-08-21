@@ -17,7 +17,7 @@ func InitRouter() *gin.Engine {
 	}))
 
 	authorized.GET("/", controllers.Index)
-	authorized.GET("/top10", controllers.GetTop10)
+	authorized.GET("/top10/:name", controllers.GetTop10)
 
 	//router.GET("/", controllers.Index)
 	//router.GET("/top10", controllers.GetTop10)

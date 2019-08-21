@@ -13,20 +13,27 @@
 {{/*<div class="layui-main">*/}}
 <div class="layui-row">
     {{/*<div class="layui-main layui-col-md5  layui-col-md-offset4">*/}}
-    <div class="layui-layer-title">
-        <h4>AI调仓(每日top9持仓8天)</h4>
+    <div class="layui-layer-title layui-bg-green">
+        <h4>AI调仓做空</h4>
     </div>
     <div class="layui-layer-content">
-        <table id="top10" lay-filter="test"></table>
+        <table id="rshort" lay-filter="rshort"></table>
     </div>
 
-
-    <div class="layui-layer-title">
-        <h4>待定</h4>
+    <div class="layui-layer-title layui-bg-green">
+        <h4>财务做空</h4>
     </div>
     <div class="layui-layer-content">
-        <table id="top11" lay-filter="test"></table>
+        <table id="fshort" lay-filter="fshort"></table>
     </div>
+
+    <div class="layui-layer-title layui-bg-green">
+        <h4>滑动窗口做空</h4>
+    </div>
+    <div class="layui-layer-content">
+        <table id="sshort" lay-filter="sshort"></table>
+    </div>
+
 
 </div>
 

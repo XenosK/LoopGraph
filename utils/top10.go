@@ -1,85 +1,27 @@
 package utils
 
 import (
+	//"github.com/goinggo/mapstructure"
 	"LoopGraph/models"
 	"fmt"
 	"sort"
 	"encoding/json"
 )
 
-// 日期存放结果
-var DateList []string
-
-
-// 总收益
-func TotalMath(stockinfo map[string]interface{}) float64 {
-	var totalRate float64 =1
-	for k, v := range stockinfo {
-		if k != "stock" {
-
-			if vf, ok := v.(float64);ok{
-				totalRate=(1+vf/100)*totalRate
-			}
-
-		}
-	}
-	totalString := float64(totalRate-1)*100
-	return totalString
-}
-
-//// 总收益
-//func TotalMath(stockinfo map[string]string) string {
-//	var totalRate float64 =1
-//	for k, v := range stockinfo {
-//		if k != "stock" {
-//
-//			vf, _ := strconv.ParseFloat(v, 64)
-//			totalRate=(1+vf/100)*totalRate
-//		}
-//	}
-//	totalString := strconv.FormatFloat(float64(totalRate-1)*100, 'f', 6, 64)
-//	return totalString
-//}
+/*
+日期存放结果
+ */
+var DateList_rlong []string
+var DateList_flong []string
+var DateList_slong []string
+var DateList_rshort []string
+var DateList_fshort []string
+var DateList_sshort []string
 
 /**
-根据value排序
- */
-func SortMap(stock_mp map[string]map[string]interface{}) []string {
-	//var new_stock_list = make([]string, 0)
-	var Stock_list = make([]string, 0)
-
-	for stock_key, _ := range stock_mp {
-		Stock_list = append(Stock_list, stock_key)
-	}
-	sort.Strings(Stock_list)
-	//for _, v := range stock_list {
-	//	new_stock_list = append(new_stock_list, stock_mp[v])
-	//}
-	return Stock_list
-}
-
-
-// 日期去重
-func RemoveRepByLoop(slc []string) []string {
-	result := []string{}  // 存放结果
-	for i := range slc{
-		flag := true
-		for j := range result{
-			if slc[i] == result[j] {
-				flag = false  // 存在重复元素，标识为false
-				break
-			}
-		}
-		if flag {  // 标识为false，不添加进结果
-			result = append(result, slc[i])
-		}
-	}
-	return result
-}
-
-
-// format mysql数据
-func SerializeTop10(realprice []models.Realprice) []map[string]interface{}{
+序列化mysql查询的股票每日涨跌数据
+**/
+func SerializeLongShort(realprice []map[string]interface {}, name string) []map[string]interface{}{
 	// 存储每只股票的结果
 	stockRecord := make(map[string]map[string]interface{})
 	// 初始化持仓记录
@@ -87,15 +29,27 @@ func SerializeTop10(realprice []models.Realprice) []map[string]interface{}{
 
 	// mysql中字段content需要的内容
 	content := []models.Content{}
-	// 遍历查处的所有结果
+	//content := []map[string]interface{}{}
+	// 遍历查处的所有结果，[{content:[],},{},{}]
 	for _, con := range realprice {
+		fmt.Println(con["content"])
 		// 获取每条结果的content字段，并发序列化json
-		err := json.Unmarshal([]byte(con.Content), &content)
-		if err != nil {
+		c := con["content"]
+		//err := mapstructure.Decode(con["content"], &content) // map转struct
+		//_,ok:=c.(string); if ok{
+		//	err := json.Unmarshal(c, &content)//json 转 struct
+		//}
+		// 类型判断后，string转byte转struct
+		result, ok := c.(string)
+		if !ok {
+			fmt.Println("not ok")
+		}else{
+			data := []byte(result)
+			err := json.Unmarshal(data, &content)
 			fmt.Println(err)
-			break
 		}
 
+		//SerializeContent(stockRecord, content)
 		today_rate := 0.0
 		today_date := ""
 		stock_num := 0
@@ -121,24 +75,8 @@ func SerializeTop10(realprice []models.Realprice) []map[string]interface{}{
 
 		}
 		stockRecord["持仓股票统计"][today_date] = float64(today_rate)/float64(stock_num)
-
 	}
-
-	//var DateList []string
-	// 清空日期列表，并重新放入最新的列表
-	DateList = DateList[0:0]
-	for k,_ := range stockRecord["US..INX"]{
-		if k!="stock"{
-			DateList = append(DateList, k)
-		}
-	}
-	// 去冲日期列表
-	DateList = RemoveRepByLoop(DateList)
-	// 排序日期列表
-	//sort.Strings(DateList)
-	// 倒叙
-	sort.Stable(sort.Reverse(sort.StringSlice(DateList)))
-
+	DataStatistics(name, stockRecord["US..INX"])
 
 	stockRecord["US..INX"]["stock"] = "标普500指数"
 	stockRecord["US..INX"]["total"] = TotalMath(stockRecord["US..INX"])
@@ -163,3 +101,83 @@ func SerializeTop10(realprice []models.Realprice) []map[string]interface{}{
 	return stockRecords
 }
 
+/**
+统计日期
+**/
+func DataStatistics(name string, inx map[string]interface{} ){
+	// 清空日期列表，并重新放入最新的列表
+	dateList := []string{}
+	for k,_ := range inx{
+		if k!="stock"{
+			dateList = append(dateList, k)
+		}
+	}
+	// 去重日期列表
+	dateList = RemoveRepByLoop(dateList)
+	// 倒叙排序日期列表
+	//sort.Strings(DateList)
+	sort.Stable(sort.Reverse(sort.StringSlice(dateList)))
+
+	switch name {
+		case "rlong": DateList_rlong = dateList
+		case "rshort": DateList_rshort = dateList
+		case "slong": DateList_slong = dateList
+		case "sshort": DateList_sshort = dateList
+		case "flong": DateList_flong = dateList
+		case "fshort": DateList_fshort = dateList
+	default:
+		DateList_rlong = dateList
+	}
+
+}
+
+/**
+总收益
+*/
+func TotalMath(stockinfo map[string]interface{}) float64 {
+	var totalRate float64 =1
+	for k, v := range stockinfo {
+		if k != "stock" {
+
+			if vf, ok := v.(float64);ok{
+				totalRate=(1+vf/100)*totalRate
+			}
+
+		}
+	}
+	totalString := float64(totalRate-1)*100
+	return totalString
+}
+
+/**
+根据value排序
+*/
+func SortMap(stock_mp map[string]map[string]interface{}) []string {
+	var Stock_list = make([]string, 0)
+
+	for stock_key, _ := range stock_mp {
+		Stock_list = append(Stock_list, stock_key)
+	}
+	sort.Strings(Stock_list)
+	return Stock_list
+}
+
+/**
+日期去重
+*/
+func RemoveRepByLoop(slc []string) []string {
+	result := []string{}  // 存放结果
+	for i := range slc{
+		flag := true
+		for j := range result{
+			if slc[i] == result[j] {
+				flag = false  // 存在重复元素，标识为false
+				break
+			}
+		}
+		if flag {  // 标识为false，不添加进结果
+			result = append(result, slc[i])
+		}
+	}
+	return result
+}

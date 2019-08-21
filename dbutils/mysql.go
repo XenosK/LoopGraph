@@ -13,6 +13,7 @@ var DB *gorm.DB
 func InitMysql() {
 	//mysqlurl := configs.GetConfig("local")
 	mysqlurl := configs.Config.Local["url"]
+	//mysqlurl := configs.Config.Line["url"]
 	var err error
 	DB, err = gorm.Open("mysql", mysqlurl)
 
