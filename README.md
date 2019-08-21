@@ -1,3 +1,3 @@
 # LoopGraph
 
-![](/Users/gumkk/Desktop/WechatIMG252.jpeg)
+![image](https://github.com/GumKey/LoopGraph/blob/master/static/images/WechatIMG252.jpeg)
