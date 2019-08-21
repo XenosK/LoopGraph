@@ -3,9 +3,9 @@ package utils
 import (
 	//"github.com/goinggo/mapstructure"
 	"LoopGraph/models"
-	"fmt"
-	"sort"
 	"encoding/json"
+	//"fmt"
+	"sort"
 )
 
 /*
@@ -25,14 +25,14 @@ func SerializeLongShort(realprice []map[string]interface {}, name string) []map[
 	// 存储每只股票的结果
 	stockRecord := make(map[string]map[string]interface{})
 	// 初始化持仓记录
-	stockRecord["持仓股票统计"] = map[string]interface{}{"stock": "持仓股票统计"}
+	stockRecord["持仓股票统计"] = map[string]interface{}{"stock": "持仓股票统计", "total":0.0}
 
 	// mysql中字段content需要的内容
 	content := []models.Content{}
 	//content := []map[string]interface{}{}
 	// 遍历查处的所有结果，[{content:[],},{},{}]
 	for _, con := range realprice {
-		fmt.Println(con["content"])
+		//fmt.Println(con["content"])
 		// 获取每条结果的content字段，并发序列化json
 		c := con["content"]
 		//err := mapstructure.Decode(con["content"], &content) // map转struct
@@ -41,12 +41,9 @@ func SerializeLongShort(realprice []map[string]interface {}, name string) []map[
 		//}
 		// 类型判断后，string转byte转struct
 		result, ok := c.(string)
-		if !ok {
-			fmt.Println("not ok")
-		}else{
+		if ok {
 			data := []byte(result)
-			err := json.Unmarshal(data, &content)
-			fmt.Println(err)
+			json.Unmarshal(data, &content)
 		}
 
 		//SerializeContent(stockRecord, content)
@@ -78,16 +75,19 @@ func SerializeLongShort(realprice []map[string]interface {}, name string) []map[
 	}
 	DataStatistics(name, stockRecord["US..INX"])
 
-	stockRecord["US..INX"]["stock"] = "标普500指数"
-	stockRecord["US..INX"]["total"] = TotalMath(stockRecord["US..INX"])
-	stockRecord["持仓股票统计"]["total"] = TotalMath(stockRecord["持仓股票统计"])
-
 	// 最终返回结果，先将持仓股票和标普500放入，排列在前
 	var stockRecords []map[string]interface{}
+
+	stockRecord["持仓股票统计"]["total"] = TotalMath(stockRecord["持仓股票统计"])
 	stockRecords = append(stockRecords, stockRecord["持仓股票统计"])
+
+	stockRecord["US..INX"]["stock"] = "标普500指数"
+	stockRecord["US..INX"]["total"] = TotalMath(stockRecord["US..INX"])
 	stockRecords = append(stockRecords, stockRecord["US..INX"])
+
 	delete(stockRecord, "持仓股票统计")
 	delete(stockRecord, "US..INX")
+
 
 	// 对剩余股票排序后，写入最总结果的list
 	sortListKey := SortMap(stockRecord)
@@ -125,8 +125,8 @@ func DataStatistics(name string, inx map[string]interface{} ){
 		case "sshort": DateList_sshort = dateList
 		case "flong": DateList_flong = dateList
 		case "fshort": DateList_fshort = dateList
-	default:
-		DateList_rlong = dateList
+	//default:
+	//	DateList_rlong = dateList
 	}
 
 }
@@ -138,11 +138,9 @@ func TotalMath(stockinfo map[string]interface{}) float64 {
 	var totalRate float64 =1
 	for k, v := range stockinfo {
 		if k != "stock" {
-
 			if vf, ok := v.(float64);ok{
 				totalRate=(1+vf/100)*totalRate
 			}
-
 		}
 	}
 	totalString := float64(totalRate-1)*100
@@ -180,4 +178,19 @@ func RemoveRepByLoop(slc []string) []string {
 		}
 	}
 	return result
+}
+
+/*
+分页操作
+ */
+func Paging(count int, page int, limit int)  (int,int){
+	small_limit := (page-1)*limit
+	big_limit := page*limit
+	if small_limit>count{
+		small_limit = 0
+		big_limit = 0
+	} else if big_limit>count{
+		big_limit = count
+	}
+	return small_limit, big_limit
 }

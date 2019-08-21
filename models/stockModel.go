@@ -10,37 +10,6 @@ type Model struct {
 	DeletedAt *time.Time `sql:"index" json:"deletedAt" structs:"deletedAt"`
 }
 
-
-type Article struct {
-	Model
-
-	AuthorID     uint64    `json:"authorID" structs:"authorID"`
-	Title        string    `gorm:"size:128" json:"title" structs:"title"`
-	Abstract     string    `gorm:"type:mediumtext" json:"abstract" structs:"abstract"`
-	Tags         string    `gorm:"type:text" json:"tags" structs:"tags"`
-	Content      string    `gorm:"type:mediumtext" json:"content" structs:"content"`
-	Path         string    `sql:"index" gorm:"size:255" json:"path" structs:"path"`
-	Status       int       `sql:"index" json:"status" structs:"status"`
-	Topped       bool      `json:"topped" structs:"topped"`
-	Commentable  bool      `json:"commentable" structs:"commentable"`
-	ViewCount    int       `json:"viewCount" structs:"viewCount"`
-	CommentCount int       `json:"commentCount" structs:"commentCount"`
-	IP           string    `gorm:"size:128" json:"ip" structs:"ip"`
-	UserAgent    string    `gorm:"size:255" json:"userAgent" structs:"userAgent"`
-	PushedAt     time.Time `json:"pushedAt" structs:"pushedAt"`
-
-	BlogID uint64 `sql:"index" json:"blogID" structs:"blogID"`
-}
-
-type ApiData struct {
-
-	Code     uint64    `json:"id" structs:"id"`
-	Msg      string    `json:"msg" structs:"msg"`
-	Count    uint64    `json:"id" structs:"id"`
-	Data     uint64    `json:"id" structs:"id"`
-}
-
-
 // 做多top9bar10
 type LongShort struct {
 	//Model
@@ -56,35 +25,30 @@ type LongShort struct {
 type Realprice struct {
 	//Model
 	LongShort
-
 }
 
 // 滑动窗口做多
 type Sliding_window_20_long_realprice struct {
 	//Model
 	LongShort
-
 }
 
 //滑动窗口做空
 type Sliding_window_20_short_realprice struct {
 	//Model
 	LongShort
-
 }
 
 //财务做多
 type Finance_long_realprice struct {
 	//Model
 	LongShort
-
 }
 
 //财务做空
 type Finance_short_realprice struct {
 	//Model
 	LongShort
-
 }
 
 // 二分类做空
@@ -104,14 +68,4 @@ type Content struct {
 	Time_key     string    `json:"time_key" structs:"time_key"`
 
 }
-
-
-type Top10 struct {
-	//Model
-	Code         int16                 `json:"code" structs:"code"`
-	Count        int32                 `json:"count" structs:"count"`
-	Msg   		 string                `json:"msg" structs:"msg"`
-	Data         []map[string]string   `json:"Data" structs:"Data"`
-}
-
 
