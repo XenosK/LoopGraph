@@ -11,8 +11,8 @@ import (
 var DB *gorm.DB
 
 func InitMysql() {
-	//mysqlurl := configs.GetConfig("local")
-	mysqlurl := configs.Config.Local["url"]
+	//mysqlurl := configs.GetConfig("local") //写法是启动程序时候，初始化config
+	mysqlurl := configs.Config.Line["mysqlurl"]
 	//mysqlurl := configs.Config.Line["url"]
 	var err error
 	DB, err = gorm.Open("mysql", mysqlurl)

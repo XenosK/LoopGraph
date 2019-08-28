@@ -12,15 +12,22 @@ func InitRouter() *gin.Engine {
 	router.LoadHTMLGlob("views/*")
 	router.Static("/static", "./static")
 
+	// html
 	authorized := router.Group("/", gin.BasicAuth(gin.Accounts{
 		"loop":    "LOOP2themoon",
 	}))
 
 	authorized.GET("/", controllers.Index)
 	authorized.GET("/top10/:name", controllers.GetTop10)
+	authorized.GET("/detailslist", controllers.StrategyDetails)
+	//authorized.GET("/api/strategy", controllers.StrategyApi)
 
-	//router.GET("/", controllers.Index)
-	//router.GET("/top10", controllers.GetTop10)
+	////api
+	api := router.Group("/api",)
+	api.GET("/strategy", controllers.StrategyApi)
+	////authorized.GET("/top10/:name", controllers.GetTop10)
+
+
 
 	return router
 }

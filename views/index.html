@@ -14,16 +14,17 @@
 
 
 {{/*tab*/}}
+{{/*<iframe src="https://www.baidu.com/" width="100%", height=300px></iframe>*/}}
 
-<div class="layui-carousel" id="test1">
-    <div carousel-item>
-        <div>条目1</div>
-        <div>条目2</div>
-        <div>条目3</div>
-        <div>条目4</div>
-        <div>条目5</div>
-    </div>
-</div>
+{{/*<div class="layui-carousel" id="test1">*/}}
+{{/*    <div carousel-item>*/}}
+{{/*        <div>条目1</div>*/}}
+{{/*        <div>条目2</div>*/}}
+{{/*        <div>条目3</div>*/}}
+{{/*        <div>条目4</div>*/}}
+{{/*        <div>条目5</div>*/}}
+{{/*    </div>*/}}
+{{/*</div>*/}}
 
 <div class="layui-tab layui-tab-card">
     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
@@ -31,11 +32,14 @@
         <ul class="layui-tab-title" >
             <li class="layui-this" lay-id="111">做多</li>
             <li lay-id="112">做空</li>
+            <li lay-id="113">回测走势</li>
         </ul>
 
-        <div class="layui-tab-content" style="height: 100px;">
+{{/*        <div class="layui-tab-content" style="height: 100px;">*/}}
+        <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">{{ template "loopLong"}}</div>
             <div class="layui-tab-item">{{ template "loopShort"}}</div>
+            <div class="layui-tab-item">{{ template "loopBack"}}</div>
         </div>
 
     </div>

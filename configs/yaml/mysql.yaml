@@ -1,6 +1,8 @@
 local:
-  url: "root:123456@/loop?charset=utf8&parseTime=True&loc=Local"
+  mysqlurl: "root:123456@/loop?charset=utf8&parseTime=True&loc=Local"
+  mongourl: "mongodb://127.0.0.1"
 
 
 line:
-  url: "LINE"
+  mysqlurl: "root:127.0.0.1"
+  mongourl: "mongodb://127.0.0.1"

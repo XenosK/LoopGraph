@@ -43,7 +43,10 @@ func SerializeLongShort(realprice []map[string]interface {}, name string) []map[
 		result, ok := c.(string)
 		if ok {
 			data := []byte(result)
-			json.Unmarshal(data, &content)
+			err :=json.Unmarshal(data, &content)
+			if err != nil{
+				//fmt.Println(err)
+			}
 		}
 
 		//SerializeContent(stockRecord, content)

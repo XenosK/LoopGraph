@@ -5,8 +5,11 @@ import (
 	"LoopGraph/models"
 	"LoopGraph/utils"
 	"encoding/json"
+	"LoopGraph/configs"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 	"net/http"
 	"strconv"
 )
@@ -17,7 +20,7 @@ func Index(c *gin.Context) {
 	// 根据登陆的用户，得到指定信息
 	//user := c.MustGet(gin.AuthUserKey).(string)
 	//if secret, ok :=secrets[user]; ok {
-	//	c.HTML(http.StatusOK, "index.html", gin.H{
+	//	c.HTML(http.StatusOK, "strategyDetails.html", gin.H{
 	//		"user":secret,
 	//	})
 	//}
@@ -26,6 +29,7 @@ func Index(c *gin.Context) {
 	////		"user": user, "secret": "NO SECRET :(",
 	////	})
 	////}
+	fmt.Println("怎么肥4")
 	// 渲染html页面
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"dates_rlong" : utils.DateList_rlong,
@@ -85,4 +89,42 @@ func GetTop10(c *gin.Context)  {
 		"count": count,
 		"data":  stockRecords,
 	})
+}
+
+
+func StrategyApi(c *gin.Context)  {
+
+	sid, _ := strconv.Atoi(c.Query("sid"))
+	mongourl := configs.Config.Local["mongourl"]
+	mongo, err := mgo.Dial(mongourl) // 建立连接
+	if err!= nil{
+		fmt.Println(err)
+	}
+	client := mongo.DB("strategys").C("loopresult")
+
+	strategy := models.Strategy{}
+	cErr := client.Find(bson.M{"sid": int(sid)}).One(&strategy)
+	if cErr != nil {
+		fmt.Println(cErr)
+	}
+
+	jsons, _ := json.Marshal(strategy) //转换成JSON返回的是byte[]
+
+	defer mongo.Close()
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":  0,
+		"msg":   "ok",
+		//"data":  string(jsons),
+		"data":  json.RawMessage(jsons),
+	})
+}
+
+
+func StrategyDetails(c *gin.Context) {
+	sid, _ := strconv.Atoi(c.Query("sid"))
+	c.HTML(http.StatusOK, "strategyDetails.html", gin.H{
+		"sid": sid,
+	})
+
 }

@@ -1,0 +1,8 @@
+syntax="proto3";
+package example;
+
+message Msg {
+    int32 msgType  = 1;
+    string MsgInfo = 2;
+    string MsgFrom = 3;
+}

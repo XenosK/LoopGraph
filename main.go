@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
+	_ "LoopGraph/configs"
 	_ "LoopGraph/dbutils"
 	"LoopGraph/routers"
-	_ "LoopGraph/configs"
+	"fmt"
 )
 
 func main()  {

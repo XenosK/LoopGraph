@@ -69,3 +69,27 @@ type Content struct {
 
 }
 
+
+type Strategy struct {
+	//Records      	map[string]interface{}	`bson:"records,omitempty" json:"records"`
+	Sqn   			map[string]interface{}	`bson:"sqn,omitempty" json:"sqn"`
+	TimeReturn  	map[string]interface{}	`bson:"timeReturn,omitempty" json:"timeReturn"`
+	AnnualReturn    map[string]interface{}	`bson:"annualReturn,omitempty" json:"annualReturn"`
+	SharpeRatio     map[string]interface{}	`bson:"sharpeRatio,omitempty" json:"sharpeRatio"`
+	DrawDown   		map[string]interface{}	`bson:"drawDown,omitempty" json:"drawDown"`
+	TradeAnalyzer   map[string]interface{}	`bson:"tradeAnalyzer,omitempty" json:"tradeAnalyzer"`
+	TransactionRecordVO   []interface{}	`bson:"transactionRecordVO,omitempty" json:"transactionRecordVO"`
+
+	StartDay 		string	`bson:"startDay,omitempty" json:"startDay"`
+	EndDay 			string	`bson:"endDay,omitempty" json:"endDay"`
+	StartCash 		float64	`bson:"startCash,omitempty" json:"startCash"`
+	Cashvalue 		float64	`bson:"cashvalue,omitempty" json:"cashvalue"`
+	Portvalue 		float64	`bson:"portvalue,omitempty" json:"portvalue"`
+	Pnl				float64	`bson:"pnl,omitempty" json:"pnl"`
+	Yield			float64	`bson:"yield,omitempty" json:"yield"`
+	Won				float64	`bson:"won,omitempty" json:"won"`
+	Use_time_es		string	`bson:"use_time_es,omitempty" json:"use_time_es"`
+	Use_time_loop	string	`bson:"use_time_loop,omitempty" json:"use_time_loop"`
+	Create_time		string	`bson:"create_time,omitempty" json:"create_time"`
+	Sid				int64 	`bson:"sid,omitempty" json:"sid"`
+}
