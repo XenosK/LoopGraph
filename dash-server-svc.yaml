@@ -1,0 +1,16 @@
+apiVersion: v1
+
+kind: Service
+metadata:
+  name: dashserver-svc
+  labels:
+    app: dashserver-service
+
+spec:
+  type: NodePort
+  ports:
+  - port: 8070 #8055
+    targetPort: 8070 #8055
+    nodePort: 31855
+  selector:
+    app: dashserver-pod

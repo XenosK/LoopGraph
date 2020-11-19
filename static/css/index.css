@@ -8,10 +8,18 @@ h1{
     text-align: center;
 }
 
-.layui-layer-content{
-    text-align:center;
+h2{
+    text-align: center;
 }
 
+.layui-layer-content{
+    text-align:center;
+    /*color: #9f7f49;*/
+}
+
+#loopsid {
+    background-color:yellow;
+}
 
 /*#graph{*/
 /*    text-align: center;*/

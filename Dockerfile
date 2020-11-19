@@ -4,14 +4,15 @@
 # BUILD: docker build --rm -t registry.cn-shanghai.aliyuncs.com/iquant/dash-server:go1.2.1 .
 
 
-#FROM golang:alpine
-FROM gowebtest:latest
+# FROM golang:alpine
+# FROM golang:alpine-gcc
+FROM registry.cn-shanghai.aliyuncs.com/iquant/dash-server:gcc
 
 WORKDIR /opt/LoopGraph/
 COPY . /opt/LoopGraph/
 ENV GO111MODULE=on
 ENV GOPROXY=https://goproxy.cn
-#RUN apk add --no-cache gcc musl-dev git && go build -i -v
+# RUN apk add --no-cache gcc musl-dev git && go build -i -v
 RUN go build -i -v
 
 
