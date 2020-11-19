@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func main()  {
 
 	fmt.Println("开始了")
 	router := routers.InitRouter()

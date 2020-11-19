@@ -1,4 +1,5 @@
 {{ define "loopBack" }}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -10,28 +11,85 @@
 <body>
 
 
-
+{{/**layui-col-md4 layui-col-space10 实现3等份**/}}
 <div class="layui-container">
-    <div class="layui-row">
-        {{ range .strategyData }}
-        <div>
-            <div class="layui-layer-title" id="loopsid" style="height: 30px; background-color: black;"><h2 style="color: white; text-align: center">{{ .name }}</h2></div>
+{{/*<div class="layui-fluid">*/}}
+
+    <div class="layui-row layui-col-space10">
+{{/*    <div class="layui-row">*/}}
+
+        <div class="layui-col-md4">
+            <div class="layui-layer-title layui-bg-black">财务做空走势</div>
             <div class="layui-layer-content">
-                <iframe src="https://dash.loopbook.cn/details/{{ .code }}/{{ .kline }}/{{ .cid }}/{{ .ranger }}"  frameborder="0" height="700px" width="100%"></iframe>
-                <!-- <iframe src="https://dash.loopbook.cn/details/btc/{{ .cid }}"  frameborder="0" height="700px" width="100%"></iframe> -->
-                <!-- <iframe src="http://127.0.0.1:8070/details/btc/{{ .cid }}" frameborder="0" height="800px" width="100%"></iframe> -->
+                <iframe src="https://dash.loopbook.cn/detailslist?sid=1" frameborder="0" height="700px" width="100%"></iframe>
+{{/*                <iframe src="http://127.0.0.1:8070/detailslist?sid=1" frameborder="0" height="700px" width="100%"></iframe>*/}}
             </div>
+            <div class="layui-m-layer-footer layui-bg-black"></div>
         </div>
-        {{ end }}
+
+        <div class="layui-col-md4">
+            <div class="layui-layer-title layui-bg-black">分类做多走势</div>
+            <div class="layui-layer-content">
+                <iframe src="https://dash.loopbook.cn/detailslist?sid=1" frameborder="0" height="700px" width="100%"></iframe>
+{{/*                <iframe src="http://127.0.0.1:8070/detailslist?sid=1" frameborder="0" height="700px" width="100%"></iframe>*/}}
+            </div>
+            <div class="layui-m-layer-footer layui-bg-black"></div>
+        </div>
+
+        <div class="layui-col-md4">
+            <div class="layui-layer-title layui-bg-black">滑动窗口做多走势</div>
+            <div class="layui-layer-content">
+                <iframe src="https://dash.loopbook.cn/detailslist?sid=1" frameborder="0" height="700px" width="100%"></iframe>
+{{/*                <iframe src="http://127.0.0.1:8070/detailslist?sid=1" frameborder="0" height="700px" width="100%"></iframe>*/}}
+            </div>
+            <div class="layui-m-layer-footer layui-bg-black"></div>
+        </div>
+
     </div>
+
 </div>
 
+{{/*<div id="test1"></div>*/}}
+
+{{/*layui-col-xs5 实现两等份*/}}
+{{/*<div class="layui-container">*/}}
+{{/*    */}}
+{{/*    <div class="layui-row">*/}}
+{{/*        <div class="layui-col-xs5">*/}}
+{{/*            <div class="layui-layer-title layui-bg-black">财务做空走势图</div>*/}}
+{{/*            <div class="layui-layer-body">*/}}
+{{/*                <iframe src="https://stock.loopbook.cn/backtrader/detailsList.html?id=1297&token=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTY2ODEzMjAxLCJzdWIiOiJ7XCJ1c2VySWRcIjozfSIsImV4cCI6MTU2NjgxNDkyOX0.hut48ElXgECdabjiEf_8iRVtNTt9g3kIAK0kUM6wb3Y"*/}}
+{{/*                        frameborder="0" height="700px" width="100%"></iframe>*/}}
+{{/*            </div>*/}}
+{{/*        </div>*/}}
+
+{{/*        <div class="layui-col-xs5 layui-col-xs-offset2">*/}}
+{{/*            <div class="layui-layer-title layui-bg-black">分类做多走势</div>*/}}
+{{/*            <div class="layui-layer-body">*/}}
+{{/*                <iframe src="https://stock.loopbook.cn/backtrader/detailsList.html?id=1297&token=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTY2ODEzMjAxLCJzdWIiOiJ7XCJ1c2VySWRcIjozfSIsImV4cCI6MTU2NjgxNDkyOX0.hut48ElXgECdabjiEf_8iRVtNTt9g3kIAK0kUM6wb3Y"*/}}
+{{/*                        frameborder="0" height="700px" width="100%"></iframe>*/}}
+{{/*            </div>*/}}
+{{/*        </div>*/}}
+{{/*    </div>*/}}
+
+{{/*</div>*/}}
 
 
 <script src="/static/lib/layui/layui.js"></script>
 
+{{/*<script>*/}}
+{{/*    layui.use('laypage', function(){*/}}
+{{/*        var laypage = layui.laypage;*/}}
+
+{{/*        //执行一个laypage实例*/}}
+{{/*        laypage.render({*/}}
+{{/*            elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号*/}}
+{{/*            ,count: 50 //数据总数，从服务端得到*/}}
+{{/*        });*/}}
+{{/*    });*/}}
+{{/*</script>*/}}
+
 
 </body>
-
 </html>
 {{ end }}
